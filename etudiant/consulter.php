@@ -1,0 +1,21 @@
+
+<?php 
+require_once("dossier_etudiant.php");
+require_once("consulter_form.php");
+ if(isset($_POST["acceder"])){
+        $_SESSION["reference"]=$_POST["reference"];
+        if(is_numeric($_SESSION["reference"])){
+            if(getEid($db)!=0){
+                messageDossierInexistant();
+                consulterForm();
+            }else{
+                affiche_dossierEtudiant($db,$_SESSION["reference"]);
+            }
+        }else{
+            informations();
+            consulterForm();
+        }
+    }else{
+        consulterForm();
+    }
+?>
